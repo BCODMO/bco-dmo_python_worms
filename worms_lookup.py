@@ -106,7 +106,17 @@ def main():
     save_results_to_csv(api_results, output_file)
     print(output_file_name + ".csv was saved in the same folder as the input file (relative path = " + os.path.dirname(original_file) + ")")
 
+    # Step 8: Ask the user if they want to merge results onto the original DataFrame
+    merge_choice = input("Do you want to merge key results with the original data columns? (yes/no): ").strip().lower()
 
+    if merge_choice == 'yes':
+        merged_output_name = input("What do you want to call the merged output file (without extension)? ")
+        merged_df = merge_dataframes(df, api_results)
+
+        # Define the merged output file path
+        merged_output_file = os.path.join(os.getcwd(), f'{merged_output_name}.csv')
+        merged_df.to_csv(merged_output_file, index=False)  # Save the merged DataFrame
+        print('Merged results saved to:', merged_output_file)
 
 if __name__ == "__main__":
     main()
