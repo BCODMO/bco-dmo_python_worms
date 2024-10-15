@@ -58,7 +58,7 @@ def merge_dataframes(original_df, api_results):
     # Specify columns to keep after merging
     merge_columns = [
         'PI_entered_name', 'AphiaID', 'scientificname',
-        'status', 'rank', 'valid_name', 'LSID', 'match_type'
+        'status', 'rank', 'valid_name', 'lsid', 'match_type'
     ]
 
     # Perform the merge
@@ -101,22 +101,26 @@ def main():
 
     # Step 6: Define the output file path
     output_file = os.path.join(os.path.dirname(original_file), f'{output_file_name}_deduplicated_worms_taxa_results.csv')
+    output_file_name = str(os.path.join(os.path.dirname(original_file), f'{output_file_name}_deduplicated_worms_taxa_results.csv'))
 
     # Step 7: Save the results to a new CSV
     save_results_to_csv(api_results, output_file)
-    print(output_file_name + ".csv was saved in the same folder as the input file (relative path = " + os.path.dirname(original_file) + ")")
+    print(output_file_name + " was saved in the same folder as the input file (relative path = " + os.path.dirname(original_file) + ")")
 
     # Step 8: Ask the user if they want to merge results onto the original DataFrame
     merge_choice = input("Do you want to merge key results with the original data columns? (yes/no): ").strip().lower()
 
     if merge_choice == 'yes':
         merged_output_name = input("What do you want to call the merged output file (without extension)? ")
+        merged_output_name = str(merged_output_name + "_merged_worms_bcodmo.csv")
         merged_df = merge_dataframes(df, api_results)
 
         # Define the merged output file path
-        merged_output_file = os.path.join(os.getcwd(), f'{merged_output_name}.csv')
+        merged_output_file = os.path.join(os.path.dirname(original_file), f'{merged_output_name}')
         merged_df.to_csv(merged_output_file, index=False)  # Save the merged DataFrame
-        print('Merged results saved to:', merged_output_file)
+        #print(merged_output_file'Merged results saved to:', merged_output_file)
+    else:
+        print("ok, bye")
 
 if __name__ == "__main__":
     main()
