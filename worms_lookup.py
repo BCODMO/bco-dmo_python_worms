@@ -75,7 +75,7 @@ def main():
     # Step 1: Get user input for the original file name, output file name, and column name
     original_file = input("Enter the original CSV file name (with extension). The file path is relative from where this program is run: ")
     output_file_name = input("Enter the new file name to save (without an extension)(all files will be created with suffix '_deduplicated_worms_taxa_results': ")
-    column_name = input("Enter the name of the column that contains the scientific names in the original file: ")
+
 
     # Create the output directory if it doesn't exist
     output_dir = 'output_archive'
