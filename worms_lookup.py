@@ -53,7 +53,7 @@ def save_results_to_csv(results, output_file):
     resulting_df.to_csv(output_file, index=False)  # Set index=False to avoid writing row numbers
 
 
-def merge_dataframes(original_df, api_results):
+def merge_dataframes(original_df, api_results, column_name):
     """Merge the original DataFrame with API results based on PI_entered_name."""
     results_df = pd.DataFrame(api_results)
 
@@ -65,7 +65,7 @@ def merge_dataframes(original_df, api_results):
 
     # Perform the merge
     merged_df = original_df.merge(results_df[merge_columns],
-                                  left_on='Prey_Taxa',
+                                  left_on=column_name,
                                   right_on='PI_entered_name',
                                   how='left')
     return merged_df
@@ -80,8 +80,8 @@ def main():
 
 
     # Create the output directory if it doesn't exist
-    output_dir = 'output_archive'
-    os.makedirs(output_dir, exist_ok=True)
+    #output_dir = 'output_archive'
+    #os.makedirs(output_dir, exist_ok=True)
 
     # Step 2: Read the input CSV
     df = read_csv(original_file)
@@ -92,7 +92,7 @@ def main():
         if column_name in df.columns:
             break  # Exit the loop if the column name is valid
         else:
-            print(f"Column '{column_name}' not found. Please try again.")
+            print(f"Column '{column_name}' not found. Please try again. (make sure capitalization pattern is accurate.)")
 
     # Step 4: Get unique values from the specified column
     unique_values = get_unique_values(df, column_name)
@@ -115,7 +115,7 @@ def main():
     if merge_choice == 'yes':
         merged_output_name = input("What do you want to call the merged output file (without extension)? ")
         merged_output_name = str(merged_output_name + "_merged_worms_bcodmo.csv")
-        merged_df = merge_dataframes(df, api_results)
+        merged_df = merge_dataframes(df, api_results, column_name)
 
         # Define the merged output file path
         merged_output_file = os.path.join(os.path.dirname(original_file), f'{merged_output_name}')
