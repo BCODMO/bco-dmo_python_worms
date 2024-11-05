@@ -25,3 +25,7 @@ match_deleted - this is a match with a name that has been deleted and no alterna
 **Refs**
 WoRMS API info: https://www.marinespecies.org/rest/
 WoRMS Web interface: https://www.marinespecies.org/aphia.php?p=match 
+
+**Installation**
+1. Install the Python worms_lookup.py file in /usr/local/bin directory using sudo wget -O /usr/local/bin/worms_lookup.py sudo curl -L -o /usr/local/bin/worms_lookup.py https://raw.githubusercontent.com/sauuyer/bco-dmo_python_worms/refs/heads/main/worms_lookup.py
+2. Make this file executable using: sudo chmod +x /usr/local/bin/<desired_filename> 
