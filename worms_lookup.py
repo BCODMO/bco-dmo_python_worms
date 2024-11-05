@@ -80,8 +80,8 @@ def main():
 
 
     # Create the output directory if it doesn't exist
-    output_dir = 'output_archive'
-    os.makedirs(output_dir, exist_ok=True)
+    #output_dir = 'output_archive'
+    #os.makedirs(output_dir, exist_ok=True)
 
     # Step 2: Read the input CSV
     df = read_csv(original_file)
